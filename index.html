@@ -15,7 +15,6 @@
       --bg: #020617;
       --card-bg: rgba(15, 23, 42, 0.96);
       --accent: #22c55e;
-      --accent-soft: rgba(34, 197, 94, 0.2);
       --accent-alt: #38bdf8;
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
@@ -223,7 +222,6 @@
       z-index: 0;
     }
 
-    /* Viewer: shared area for each document */
     .viewer {
       margin-top: 1.1rem;
       border-radius: var(--radius-xl);
@@ -235,6 +233,33 @@
     .panel { display: none; }
     .panel.active { display: block; }
 
+    .panel-meta {
+      padding: 0.9rem 1.1rem 0.4rem;
+      border-bottom: 1px solid rgba(15,23,42,0.6);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.3), transparent 65%);
+    }
+
+    .panel-subtitle {
+      margin: 0 0 0.45rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.23rem 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
     iframe {
       width: 100%;
       height: min(80vh, 820px);
@@ -243,7 +268,6 @@
       display: block;
     }
 
-    /* Tilt effect */
     @media (min-width: 720px) {
       #tilt-card:hover { cursor: pointer; }
     }
@@ -307,17 +331,46 @@
       <div class="viewer">
         <!-- Resume -->
         <div id="resume-panel" class="panel active">
-          <!-- You can try #toolbar=0, but some browsers ignore it -->
+          <div class="panel-meta">
+            <p class="panel-subtitle">
+              One-page summary of my background in Environmental Science, GIS, Remote Sensing, and Geomatics Engineering.
+            </p>
+            <div class="pill-row">
+              <span class="pill">GIS & Remote Sensing</span>
+              <span class="pill">Teaching & Field Experience</span>
+              <span class="pill">Environmental Applications</span>
+            </div>
+          </div>
           <iframe src="resume.pdf#view=FitH&toolbar=0" title="Resume"></iframe>
         </div>
 
         <!-- Defense Proposal -->
         <div id="proposal-panel" class="panel">
+          <div class="panel-meta">
+            <p class="panel-subtitle">
+              Thesis proposal on modeling spatiotemporal LULC change in the Pensacola metro area using CA–Markov, drivers, and remote sensing.
+            </p>
+            <div class="pill-row">
+              <span class="pill">LULC Change Modeling</span>
+              <span class="pill">CA–Markov & Drivers</span>
+              <span class="pill">Pensacola Metro</span>
+            </div>
+          </div>
           <iframe src="defense_proposal.pdf#view=FitH&toolbar=0" title="Defense Proposal"></iframe>
         </div>
 
         <!-- Map Gallery -->
         <div id="map-panel" class="panel">
+          <div class="panel-meta">
+            <p class="panel-subtitle">
+              Interactive LULC and driver map gallery showing 2006, 2016, and 2021 patterns and driver variables used in the modeling.
+            </p>
+            <div class="pill-row">
+              <span class="pill">LULC Maps</span>
+              <span class="pill">Drivers & Distances</span>
+              <span class="pill">GIS Visualization</span>
+            </div>
+          </div>
           <iframe src="map_data/map_gallery.html" title="LULC Map Gallery"></iframe>
         </div>
       </div>
@@ -325,7 +378,6 @@
   </div>
 
   <script>
-    // Tab switching + sliding highlight
     const buttons = document.querySelectorAll('.tab-btn');
     const panels  = document.querySelectorAll('.panel');
     const highlight = document.getElementById('tab-highlight');
@@ -357,7 +409,6 @@
     window.addEventListener('resize', moveHighlightToActive);
     window.addEventListener('load', moveHighlightToActive);
 
-    // Subtle 3D tilt effect on card
     const card = document.getElementById('tilt-card');
     card.addEventListener('mousemove', (e) => {
       const rect = card.getBoundingClientRect();
