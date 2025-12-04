@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title> Work - Asmita </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fb;
+      color: #222;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.9rem;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #555;
+      font-size: 0.95rem;
+    }
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .tab-btn {
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      background: #e4e8f4;
+      color: #222;
+      transition: background 0.15s, transform 0.1s, color 0.15s;
+    }
+    .tab-btn.active {
+      background: #004f9e;
+      color: #fff;
+    }
+    .tab-btn:hover {
+      transform: translateY(-1px);
+    }
+    .panel {
+      display: none;
+      margin-top: 1rem;
+    }
+    .panel.active {
+      display: block;
+    }
+    iframe {
+      width: 100%;
+      height: 75vh;
+      border: 1px solid #ddd;
+      border-radius: 0.75rem;
+      background: #fff;
+    }
+    .note {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.4rem;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Documents – Asmita Karki</h1>
+    <p class="subtitle">
+      Use the options below to view my resume, defense proposal, or maps images.
+    </p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-target="resume-panel"> Resume </button>
+      <button class="tab-btn" data-target="proposal-panel"> Defense Proposal </button>
+      <button class="tab-btn" data-target="html-panel"> Maps Images </button>
+    </div>
+
+    <!-- Resume PDF -->
+    <div id="resume-panel" class="panel active">
+      <iframe src="resume.pdf#view=FitH" title="Resume"></iframe>
+      <p class="note">
+        If the preview doesn’t load, <a href="resume.pdf" target="_blank" rel="noopener">open the resume in a new tab</a>.
+      </p>
+    </div>
+
+    <!-- Defense Proposal PDF -->
+    <div id="proposal-panel" class="panel">
+      <iframe src="defense_proposal.pdf#view=FitH" title="Defense Proposal"></iframe>
+      <p class="note">
+        If the preview doesn’t load, <a href="defense_proposal.pdf" target="_blank" rel="noopener">open the proposal in a new tab</a>.
+      </p>
+    </div>
+
+    <!-- HTML document -->
+    <div id="html-panel" class="panel">
+      <!-- Make sure html_doc/index.html exists in that folder -->
+      <iframe src="maps_data/map_gallery.html" title="HTML Document"></iframe>
+      <p class="note">
+        HTML content is loaded from <code>maps_data/map_gallery.html</code>.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const target = document.getElementById(btn.dataset.target);
+        if (target) target.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
