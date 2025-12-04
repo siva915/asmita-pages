@@ -269,20 +269,31 @@
     .panel { display: none; }
     .panel.active { display: block; }
 
+    /* Two-column layout for overview boxes */
     .panel-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      display: flex;
+      flex-wrap: wrap;
       gap: 1.1rem;
       margin-bottom: 1rem;
     }
-
+    
     .panel-left,
     .panel-right {
       background: radial-gradient(circle at top left, rgba(15,23,42,0.45), rgba(15,23,42,0.95));
       border-radius: 1rem;
       border: 1px solid rgba(148,163,184,0.35);
-      padding: 0.9rem 1rem;
+      padding: 0.75rem 0.95rem;
     }
+    
+    /* Left column slightly wider than right on large screens */
+    .panel-left {
+      flex: 1.5 1 260px;
+    }
+    
+    .panel-right {
+      flex: 1 1 220px;
+    }
+
 
     .panel-title {
       margin: 0 0 0.2rem;
