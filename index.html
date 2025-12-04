@@ -223,86 +223,24 @@
       z-index: 0;
     }
 
-    /* Content panel (no iframe) */
-    .content-wrapper {
+    /* Viewer: shared area for each document */
+    .viewer {
       margin-top: 1.1rem;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.30), rgba(15,23,42,0.98));
       border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
-      padding: 1.2rem 1.2rem 1rem;
+      overflow: hidden;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(15,23,42,0.98));
     }
 
     .panel { display: none; }
     .panel.active { display: block; }
 
-    .panel-title {
-      margin: 0 0 0.35rem;
-      font-size: 1.15rem;
-    }
-
-    .panel-subtitle {
-      margin: 0 0 0.9rem;
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .pill {
-      font-size: 0.75rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: #e5e7eb;
-      background: rgba(15, 23, 42, 0.8);
-    }
-
-    .buttons-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      border-radius: 999px;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.88rem;
-      font-weight: 500;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      cursor: pointer;
-      border: 1px solid transparent;
-    }
-
-    .primary-btn {
-      background: linear-gradient(135deg, var(--accent), var(--accent-alt));
-      color: #0b1120;
-      border-color: rgba(15, 23, 42, 0.8);
-      box-shadow: 0 12px 30px rgba(34, 197, 94, 0.35);
-    }
-
-    .primary-btn:hover {
-      box-shadow: 0 16px 40px rgba(34, 197, 94, 0.45);
-      transform: translateY(-1px);
-    }
-
-    .secondary-btn {
-      background: rgba(15, 23, 42, 0.8);
-      color: #e5e7eb;
-      border-color: rgba(148, 163, 184, 0.75);
-    }
-
-    .secondary-btn:hover {
-      background: rgba(15, 23, 42, 0.95);
-      transform: translateY(-1px);
+    iframe {
+      width: 100%;
+      height: min(80vh, 820px);
+      border: none;
+      background: #020617;
+      display: block;
     }
 
     /* Tilt effect */
@@ -320,6 +258,9 @@
       .tabs-bar {
         width: 100%;
         justify-content: space-between;
+      }
+      iframe {
+        height: 70vh;
       }
     }
   </style>
@@ -341,7 +282,7 @@
       </header>
 
       <div class="tabs-wrapper">
-        <div class="tabs-label">Select a document to open</div>
+        <div class="tabs-label">Select a document to view</div>
 
         <div class="tabs-bar" id="tabs-bar">
           <div class="tab-highlight" id="tab-highlight"></div>
@@ -363,71 +304,23 @@
         </div>
       </div>
 
-      <div class="content-wrapper">
+      <div class="viewer">
         <!-- Resume -->
         <div id="resume-panel" class="panel active">
-          <h2 class="panel-title">Resume (PDF)</h2>
-          <p class="panel-subtitle">
-            One-page summary of my background in Environmental Science, GIS, Remote Sensing, and Geomatics Engineering.
-          </p>
-          <div class="pill-row">
-            <span class="pill">GIS & Remote Sensing</span>
-            <span class="pill">Teaching & Field Experience</span>
-            <span class="pill">Environmental Applications</span>
-          </div>
-          <div class="buttons-row">
-            <a class="primary-btn" href="resume.pdf" target="_blank" rel="noopener">
-              Open Resume
-              <span>↗</span>
-            </a>
-            <a class="secondary-btn" href="resume.pdf" download>
-              Download PDF
-            </a>
-          </div>
+          <!-- You can try #toolbar=0, but some browsers ignore it -->
+          <iframe src="resume.pdf#view=FitH&toolbar=0" title="Resume"></iframe>
         </div>
 
         <!-- Defense Proposal -->
         <div id="proposal-panel" class="panel">
-          <h2 class="panel-title">Thesis Defense Proposal (PDF)</h2>
-          <p class="panel-subtitle">
-            Research on modeling spatiotemporal land-use/land-cover change (LULC) in coastal Florida using GIS, remote sensing, and CA–Markov modeling.
-          </p>
-          <div class="pill-row">
-            <span class="pill">LULC Change</span>
-            <span class="pill">CA–Markov & Drivers</span>
-            <span class="pill">Pensacola Metro</span>
-          </div>
-          <div class="buttons-row">
-            <a class="primary-btn" href="defense_proposal.pdf" target="_blank" rel="noopener">
-              Open Proposal
-              <span>↗</span>
-            </a>
-            <a class="secondary-btn" href="defense_proposal.pdf" download>
-              Download PDF
-            </a>
-          </div>
+          <iframe src="defense_proposal.pdf#view=FitH&toolbar=0" title="Defense Proposal"></iframe>
         </div>
 
         <!-- Map Gallery -->
         <div id="map-panel" class="panel">
-          <h2 class="panel-title">LULC Map Gallery (HTML)</h2>
-          <p class="panel-subtitle">
-            Interactive LULC and driver map gallery showcasing spatial patterns for 2006, 2016, and 2021, plus driver variables used in the modeling.
-          </p>
-          <div class="pill-row">
-            <span class="pill">LULC Maps</span>
-            <span class="pill">Drivers & Distances</span>
-            <span class="pill">GIS Visualization</span>
-          </div>
-          <div class="buttons-row">
-            <a class="primary-btn" href="map_data/map_gallery.html" target="_blank" rel="noopener">
-              Open Map Gallery
-              <span>↗</span>
-            </a>
-          </div>
+          <iframe src="map_data/map_gallery.html" title="LULC Map Gallery"></iframe>
         </div>
       </div>
-
     </div>
   </div>
 
