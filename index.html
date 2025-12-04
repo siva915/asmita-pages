@@ -94,6 +94,7 @@
       justify-content: space-between;
       gap: 0.75rem 1.5rem;
       margin-bottom: 1rem;
+      position: relative;
     }
 
     .title-block h1 {
@@ -140,6 +141,40 @@
         box-shadow: 0 0 28px rgba(34, 197, 94, 0.9);
         transform: translateZ(35px);
       }
+    }
+
+    /* Top-right contact icons */
+    .contact-icons {
+      position: absolute;
+      top: 0.2rem;
+      right: 0.1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .contact-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.5), rgba(15,23,42,0.95));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, border-color 0.12s ease-out;
+    }
+
+    .contact-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: #e5e7eb;
+    }
+
+    .contact-icon:hover {
+      transform: translateY(-1px);
+      border-color: rgba(56,189,248,0.9);
+      box-shadow: 0 0 14px rgba(56,189,248,0.7);
     }
 
     .tabs-wrapper {
@@ -238,6 +273,7 @@
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 1.1rem;
+      margin-bottom: 1rem;
     }
 
     .panel-left,
@@ -328,6 +364,43 @@
       transform: translateY(-1px);
     }
 
+    /* Preview area */
+    .preview-block {
+      margin-top: 0.2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(15,23,42,0.7);
+      overflow: hidden;
+      background: #020617;
+    }
+
+    .preview-header {
+      padding: 0.5rem 0.95rem;
+      border-bottom: 1px solid rgba(15,23,42,0.8);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.85), rgba(15,23,42,1));
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .preview-header span strong {
+      color: #bbf7d0;
+    }
+
+    .preview-note {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+
+    iframe {
+      width: 100%;
+      height: min(70vh, 720px);
+      border: none;
+      background: #020617;
+      display: block;
+    }
+
     /* Map panel layout */
     .map-panel-top {
       margin-bottom: 0.9rem;
@@ -360,13 +433,20 @@
     @media (max-width: 720px) {
       body { padding: 0.8rem; }
       .card {
-        padding: 1.2rem 1.25rem 1rem;
+        padding: 1.4rem 1.1rem 1.1rem;
         border-radius: 1.5rem;
       }
       header { align-items: flex-start; }
       .tabs-bar {
         width: 100%;
         justify-content: space-between;
+      }
+      iframe {
+        height: 65vh;
+      }
+      .contact-icons {
+        top: -0.2rem;
+        right: 0.1rem;
       }
     }
   </style>
@@ -385,6 +465,33 @@
           <span class="badge-dot"></span>
           <span>Environmental GIS • Remote Sensing • LULC Modeling</span>
         </div>
+
+        <!-- Top-right contact icons -->
+        <div class="contact-icons">
+          <!-- LinkedIn -->
+          <a
+            class="contact-icon"
+            href="https://www.linkedin.com/in/asmitakarki/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.3 8.11h4.4V24H.3zM8.55 8.11h4.22v2.16h.06c.59-1.12 2.03-2.3 4.18-2.3 4.47 0 5.29 2.95 5.29 6.79V24h-4.4v-7.09c0-1.69-.03-3.86-2.35-3.86-2.35 0-2.71 1.83-2.71 3.73V24H8.55z" />
+            </svg>
+          </a>
+
+          <!-- Email -->
+          <a
+            class="contact-icon"
+            href="mailto:ak229@students.uwf.edu"
+            aria-label="Email"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M2 4.75C2 3.78 2.78 3 3.75 3h16.5C21.22 3 22 3.78 22 4.75v14.5c0 .97-.78 1.75-1.75 1.75H3.75C2.78 21 2 20.22 2 19.25V4.75zm2.3.75l7.2 5.11c.31.22.7.22 1.01 0l7.19-5.11H4.3zm15.4 1.9l-5.96 4.24L19.7 17V7.4zM4.3 7.4V17l5.96-5.16L4.3 7.4z" />
+            </svg>
+          </a>
+        </div>
       </header>
 
       <div class="tabs-wrapper">
@@ -395,12 +502,12 @@
 
           <button class="tab-btn active" data-target="resume-panel">
             Resume
-            <span class="tag">Overview</span>
+            <span class="tag">Overview + Preview</span>
           </button>
 
           <button class="tab-btn" data-target="proposal-panel">
             Defense Proposal
-            <span class="tag">Research</span>
+            <span class="tag">Research + Preview</span>
           </button>
 
           <button class="tab-btn" data-target="map-panel">
@@ -464,6 +571,15 @@
               </ul>
             </div>
           </div>
+
+          <!-- Resume preview -->
+          <div class="preview-block">
+            <div class="preview-header">
+              <span>Quick preview: <strong>Resume</strong></span>
+              <span class="preview-note">Scroll within the document to view more</span>
+            </div>
+            <iframe src="resume.pdf#view=FitH&toolbar=0" title="Resume preview"></iframe>
+          </div>
         </div>
 
         <!-- Proposal Panel -->
@@ -518,6 +634,15 @@
                 </li>
               </ul>
             </div>
+          </div>
+
+          <!-- Proposal preview -->
+          <div class="preview-block">
+            <div class="preview-header">
+              <span>Quick preview: <strong>Defense Proposal</strong></span>
+              <span class="preview-note">Scroll within the document to view more</span>
+            </div>
+            <iframe src="defense_proposal.pdf#view=FitH&toolbar=0" title="Defense proposal preview"></iframe>
           </div>
         </div>
 
