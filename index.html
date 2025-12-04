@@ -44,6 +44,8 @@
           transparent 12px
         );
       background-attachment: fixed;
+      height: 100vh;        /* lock to viewport height */
+      overflow: hidden;     /* prevent page-level scrolling */
     }
 
     .shell {
@@ -80,6 +82,9 @@
       transform-style: preserve-3d;
       transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
       animation: card-enter 0.5s ease-out;
+      display: flex;
+      flex-direction: column;
+      max-height: 94vh;
     }
 
     @keyframes card-enter {
@@ -270,7 +275,7 @@
       padding: 1.2rem 1.2rem 1.1rem;
     
       /* NEW: cap height + internal scroll */
-      max-height: 85vh;
+      flex: 1;             /* take remaining height in the card */
       overflow-y: auto;
     }
 
