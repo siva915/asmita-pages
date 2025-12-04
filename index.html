@@ -228,19 +228,34 @@
       border: 1px solid var(--border-subtle);
       overflow: hidden;
       background: radial-gradient(circle at top left, rgba(56,189,248,0.25), rgba(15,23,42,0.98));
+      padding: 1.2rem 1.2rem 1.1rem;
     }
 
     .panel { display: none; }
     .panel.active { display: block; }
 
-    .panel-meta {
-      padding: 0.9rem 1.1rem 0.4rem;
-      border-bottom: 1px solid rgba(15,23,42,0.6);
-      background: radial-gradient(circle at top left, rgba(15,23,42,0.3), transparent 65%);
+    .panel-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.1rem;
+    }
+
+    .panel-left,
+    .panel-right {
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.45), rgba(15,23,42,0.95));
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.35);
+      padding: 0.9rem 1rem;
+    }
+
+    .panel-title {
+      margin: 0 0 0.2rem;
+      font-size: 1.05rem;
+      font-weight: 600;
     }
 
     .panel-subtitle {
-      margin: 0 0 0.45rem;
+      margin: 0 0 0.8rem;
       font-size: 0.9rem;
       color: var(--text-muted);
     }
@@ -249,6 +264,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.35rem;
+      margin-bottom: 0.6rem;
     }
 
     .pill {
@@ -260,16 +276,85 @@
       background: rgba(15, 23, 42, 0.85);
     }
 
-    iframe {
-      width: 100%;
-      height: min(80vh, 820px);
-      border: none;
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.88rem;
+    }
+
+    .info-list li {
+      margin-bottom: 0.45rem;
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .info-label {
+      font-weight: 500;
+      color: #cbd5f5;
+      min-width: 88px;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .small-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .download-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.84rem;
+      margin-top: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.9);
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+
+    .download-link:hover {
+      background: rgba(15,23,42,1);
+      transform: translateY(-1px);
+    }
+
+    /* Map panel layout */
+    .map-panel-top {
+      margin-bottom: 0.9rem;
+    }
+
+    .map-layout {
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.35);
       background: #020617;
+    }
+
+    .map-layout iframe {
+      width: 100%;
+      height: min(72vh, 760px);
+      border: none;
       display: block;
     }
 
     @media (min-width: 720px) {
       #tilt-card:hover { cursor: pointer; }
+    }
+
+    @media (max-width: 900px) {
+      .panel-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     @media (max-width: 720px) {
@@ -282,9 +367,6 @@
       .tabs-bar {
         width: 100%;
         justify-content: space-between;
-      }
-      iframe {
-        height: 70vh;
       }
     }
   </style>
@@ -313,57 +395,138 @@
 
           <button class="tab-btn active" data-target="resume-panel">
             Resume
-            <span class="tag">PDF</span>
+            <span class="tag">Overview</span>
           </button>
 
           <button class="tab-btn" data-target="proposal-panel">
             Defense Proposal
-            <span class="tag">PDF</span>
+            <span class="tag">Research</span>
           </button>
 
           <button class="tab-btn" data-target="map-panel">
             LULC Map Gallery
-            <span class="tag">HTML</span>
+            <span class="tag">Interactive</span>
           </button>
         </div>
       </div>
 
       <div class="viewer">
-        <!-- Resume -->
+        <!-- Resume Panel -->
         <div id="resume-panel" class="panel active">
-          <div class="panel-meta">
-            <p class="panel-subtitle">
-              One-page summary of my background in Environmental Science, GIS, Remote Sensing, and Geomatics Engineering.
-            </p>
-            <div class="pill-row">
-              <span class="pill">GIS & Remote Sensing</span>
-              <span class="pill">Teaching & Field Experience</span>
-              <span class="pill">Environmental Applications</span>
+          <div class="panel-grid">
+            <div class="panel-left">
+              <div class="small-label">Profile</div>
+              <p class="tagline">
+                One-page summary of my background in Environmental Science, GIS, Remote Sensing, and Geomatics Engineering.
+              </p>
+
+              <div class="pill-row">
+                <span class="pill">GIS & Remote Sensing</span>
+                <span class="pill">Teaching & Field Work</span>
+                <span class="pill">Environmental Applications</span>
+              </div>
+
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Degree</span>
+                  <span>M.S. Environmental Science (GIS focus), University of West Florida</span>
+                </li>
+                <li>
+                  <span class="info-label">Background</span>
+                  <span>Licensed Geomatics Engineer with strong mapping, spatial analysis, and RS skills.</span>
+                </li>
+                <li>
+                  <span class="info-label">Strengths</span>
+                  <span>Spatial analysis, cartography, Web GIS, remote sensing, and teaching GIS labs.</span>
+                </li>
+              </ul>
+
+              <a class="download-link" href="resume.pdf" download>
+                Download full resume (PDF)
+              </a>
+            </div>
+
+            <div class="panel-right">
+              <div class="small-label">Key Skills Snapshot</div>
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Software</span>
+                  <span>ArcGIS Pro, ArcGIS Online, QGIS, TerrSet, ENVI, Google Earth Engine</span>
+                </li>
+                <li>
+                  <span class="info-label">Techniques</span>
+                  <span>LULC mapping, classification, spatial statistics, web mapping, LiDAR/UAV data processing</span>
+                </li>
+                <li>
+                  <span class="info-label">Teaching</span>
+                  <span>Instructor for GIS lab with ~30 students; strong communication and mentoring.</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <iframe src="resume.pdf#view=FitH&toolbar=0" title="Resume"></iframe>
         </div>
 
-        <!-- Defense Proposal -->
+        <!-- Proposal Panel -->
         <div id="proposal-panel" class="panel">
-          <div class="panel-meta">
-            <p class="panel-subtitle">
-              Thesis proposal on modeling spatiotemporal LULC change in the Pensacola metro area using CA–Markov, drivers, and remote sensing.
-            </p>
-            <div class="pill-row">
-              <span class="pill">LULC Change Modeling</span>
-              <span class="pill">CA–Markov & Drivers</span>
-              <span class="pill">Pensacola Metro</span>
+          <div class="panel-grid">
+            <div class="panel-left">
+              <div class="small-label">Research Overview</div>
+              <p class="tagline">
+                Thesis proposal on modeling spatiotemporal land-use/land-cover change in the Pensacola metro area using GIS, remote sensing, and CA–Markov modeling.
+              </p>
+
+              <div class="pill-row">
+                <span class="pill">LULC Change</span>
+                <span class="pill">CA–Markov & Drivers</span>
+                <span class="pill">Coastal Florida</span>
+              </div>
+
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Goal</span>
+                  <span>Quantify past LULC change and predict future urban growth under different scenarios.</span>
+                </li>
+                <li>
+                  <span class="info-label">Data</span>
+                  <span>Landsat-based LULC maps (2006, 2016, 2021) and driver variables (roads, distance to urban, coastline, population, etc.).</span>
+                </li>
+                <li>
+                  <span class="info-label">Methods</span>
+                  <span>Hybrid classification, CA–Markov, and driver evaluation to explain where, when, and why LULC change occurs.</span>
+                </li>
+              </ul>
+
+              <a class="download-link" href="defense_proposal.pdf" download>
+                Download defense proposal (PDF)
+              </a>
+            </div>
+
+            <div class="panel-right">
+              <div class="small-label">What this research offers</div>
+              <ul class="info-list">
+                <li>
+                  <span class="info-label">Planning</span>
+                  <span>Decision support for local governments in Escambia &amp; Santa Rosa Counties.</span>
+                </li>
+                <li>
+                  <span class="info-label">Environment</span>
+                  <span>Insights on how urban growth interacts with sensitive coastal and wetland systems.</span>
+                </li>
+                <li>
+                  <span class="info-label">Skills</span>
+                  <span>Advanced geospatial modeling, scenario analysis, and clear map-based communication of results.</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <iframe src="defense_proposal.pdf#view=FitH&toolbar=0" title="Defense Proposal"></iframe>
         </div>
 
-        <!-- Map Gallery -->
+        <!-- Map Gallery Panel -->
         <div id="map-panel" class="panel">
-          <div class="panel-meta">
-            <p class="panel-subtitle">
-              Interactive LULC and driver map gallery showing 2006, 2016, and 2021 patterns and driver variables used in the modeling.
+          <div class="map-panel-top">
+            <div class="small-label">Interactive LULC & Driver Maps</div>
+            <p class="tagline">
+              Scroll through LULC maps for 2006, 2016, and 2021, plus driver maps (distance to roads, urban areas, coastline, population density, and more).
             </p>
             <div class="pill-row">
               <span class="pill">LULC Maps</span>
@@ -371,7 +534,10 @@
               <span class="pill">GIS Visualization</span>
             </div>
           </div>
-          <iframe src="map_data/map_gallery.html" title="LULC Map Gallery"></iframe>
+
+          <div class="map-layout">
+            <iframe src="map_data/map_gallery.html" title="LULC Map Gallery"></iframe>
+          </div>
         </div>
       </div>
     </div>
